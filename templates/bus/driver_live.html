@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Driver Tracking</title>
+</head>
+<body>
+  <h2>Live Tracking Active...</h2>
+
+  <script>
+    const socket = new WebSocket('ws://' + window.location.host + '/ws/location/');
+    const busNumber = "{{ request.user.bus.bus_number }}";
+
+    function sendLocation(position) {
+      const { latitude, longitude } = position.coords;
+
+      const data = {
+        bus_number: busNumber,
+        lat: latitude,
+        lng: longitude
+      };
+
+      socket.send(JSON.stringify(data));
+    }
+
+    function handleError(err) {
+      console.error("Geolocation error:", err);
+    }
+
+    socket.onopen = function () {
+      setInterval(() => {
+        navigator.geolocation.getCurrentPosition(sendLocation, handleError);
+      }, 5000); // каждые 5 сек
+    };
+  </script>
+</body>
+</html>
