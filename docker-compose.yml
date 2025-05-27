@@ -9,8 +9,8 @@ services:
       - ./media:/app/media
     ports:
       - "8078:8078"
-    depends_on:
-      - postgres
+#    depends_on:
+#      - postgres
     restart: always
 
 #  postgres:
