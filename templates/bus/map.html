@@ -104,7 +104,19 @@
     // WebSocket
     const socket = new WebSocket('ws://' + window.location.host + '/ws/location/');
     const busMarkers = {};
+    const staticLat = 42.844529;
+    const staticLng = 74.586345;
 
+    const driverIcon = L.icon({
+      iconUrl: 'https://cdn-icons-png.flaticon.com/512/61/61231.png',
+      iconSize: [32, 32],
+      iconAnchor: [16, 32],
+      popupAnchor: [0, -32]
+    });
+
+    const staticDriverMarker = L.marker([staticLat, staticLng], { icon: driverIcon })
+      .addTo(map)
+      .bindPopup("👤 Водитель 140");
     socket.onmessage = function(e) {
       const data = JSON.parse(e.data);
       const bus_number = data.bus_number;
