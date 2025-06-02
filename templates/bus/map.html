@@ -102,7 +102,7 @@
     });
 
     // WebSocket
-    const socket = new WebSocket('ws://' + window.location.host + '/ws/location/');
+<!--    const socket = new WebSocket('ws://' + window.location.host + '/ws/location/');-->
     const busMarkers = {};
     const staticLat = 42.844529;
     const staticLng = 74.586345;
@@ -117,21 +117,21 @@
     const staticDriverMarker = L.marker([staticLat, staticLng], { icon: driverIcon })
       .addTo(map)
       .bindPopup("👤 Водитель 140");
-    socket.onmessage = function(e) {
-      const data = JSON.parse(e.data);
-      const bus_number = data.bus_number;
-      const lat = data.lat;
-      const lng = data.lng;
+<!--    socket.onmessage = function(e) {-->
+<!--      const data = JSON.parse(e.data);-->
+<!--      const bus_number = data.bus_number;-->
+<!--      const lat = data.lat;-->
+<!--      const lng = data.lng;-->
 
-      if (busSelector.value && busSelector.value !== bus_number) return;
+<!--      if (busSelector.value && busSelector.value !== bus_number) return;-->
 
-      if (busMarkers[bus_number]) {
-        busMarkers[bus_number].setLatLng([lat, lng]);
-      } else {
-        busMarkers[bus_number] = L.marker([lat, lng], { icon: busIcon })
-          .addTo(map)
-          .bindPopup(`🚌 Bus ${bus_number}`);
-      }
+<!--      if (busMarkers[bus_number]) {-->
+<!--        busMarkers[bus_number].setLatLng([lat, lng]);-->
+<!--      } else {-->
+<!--        busMarkers[bus_number] = L.marker([lat, lng], { icon: busIcon })-->
+<!--          .addTo(map)-->
+<!--          .bindPopup(`🚌 Bus ${bus_number}`);-->
+<!--      }-->
     };
   </script>
 
