@@ -7,10 +7,18 @@ class UserAdmin(BaseUserAdmin):
     fieldsets = BaseUserAdmin.fieldsets + (
         (None, {"fields": ("bus",)}),
     )
+    search_fields = ('bus__bus_number',)
     list_display = BaseUserAdmin.list_display + ("bus",)
     list_filter = BaseUserAdmin.list_filter + ("bus",)
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Bus)
 admin.site.register(BusRoute)
-admin.site.register(BusEntry)
+
+
+@admin.register(BusEntry)
+class BusEntryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'bus', 'timestamp')
+    list_filter = ('bus',)
+    search_fields = ('bus__bus_number',)
+    ordering = ('-timestamp',)
